@@ -8,13 +8,13 @@ A GMAT flight dynamics tutorial.
 
 ## Table of Contents
 
-* About Echo
-* Installing GMAT
-* Simulating Echo I's First Orbit
-* Plotting the Ground Track with Plot.ly
-* Propagating for 150 days
-* Comparison with Echo I Observations
-* Conclusions
+* [About Echo](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/GMAT_Simulation_of_Project_Echo.md#about-echo)
+* [Installing GMAT](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/GMAT_Simulation_of_Project_Echo.md#installing-gmat)
+* [Simulating Echo I's First Orbit](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/GMAT_Simulation_of_Project_Echo.md#simulating-echo-is-first-orbit)
+* [Plotting the Ground Track with Plot.ly](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/GMAT_Simulation_of_Project_Echo.md#plotting-the-ground-track-with-plotly)
+* [Propagating for 150 days](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/GMAT_Simulation_of_Project_Echo.md#propagating-for-150-days)
+* [Comparison with Echo I Observations](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/GMAT_Simulation_of_Project_Echo.md#comparison-with-echo-1-observations)
+* [Conclusions](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/GMAT_Simulation_of_Project_Echo.md#conclusions)
 
 ## About Echo
 
@@ -60,7 +60,7 @@ We'll start by simulating the first orbit of the first Echo satellite. To do so 
 | Diameter | 30.5 m |
 | Mass | 71.4 kg |
 
-We will not simulate the ascent phase of the vehicle, just the free-flying satellite trajectory. To get these initial conditions, I took the recorded position of the satellite at 12:00 UTC on Aug 12 (obtained from [Zadunaisky et al](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/reference/1961 Zadunaisky - Experimental and theoretical results on the orbit of Echo I.pdf)) and back-propagated to the approximate moment of orbital insertion, 09:49 UTC on Aug 12.  We'll skip learning backwards propagation for now, but at least you know it's an option.
+We will not simulate the ascent phase of the vehicle, just the free-flying satellite trajectory. To get these initial conditions, I took the recorded position of the satellite at 12:00 UTC on Aug 12 (obtained from [Zadunaisky et al](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/reference/1961%20Zadunaisky%20-%20Experimental%20and%20theoretical%20results%20on%20the%20orbit%20of%20Echo%20I.pdf)) and back-propagated to the approximate moment of orbital insertion, 09:49 UTC on Aug 12.  We'll skip learning backwards propagation for now, but at least you know it's an option.
 
 In the first part of this tutorial we'll use the GUI to create a GMAT mission plan. In later sections we'll drop the GUI in favor of text scripting (the GUI is great though and you can always return to it).
 
@@ -194,7 +194,7 @@ We will modify the report file part in the following ways.
 
 ### Model Mass Losses
 
-One important thing to simulate when propagating the spacecraft over a long period of time is the change in mass. According to [Zadunaisky et al](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/reference/1961 Zadunaisky - Experimental and theoretical results on the orbit of Echo I.pdf), submlimating powders used for inflation made up 21% of the spacecraft mass, and holes punctured in the balloon by micrometeoroids allowed that gas to escape, gradually reducing the spacecraft mass over time. The authors found that a good model was that the balloon's total mass decreased by 0.64 lb/day for the first 13 days, and 0.16 lb/day after that.
+One important thing to simulate when propagating the spacecraft over a long period of time is the change in mass. According to [Zadunaisky et al](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/reference/1961%20Zadunaisky%20-%20Experimental%20and%20theoretical%20results%20on%20the%20orbit%20of%20Echo%20I.pdf), submlimating powders used for inflation made up 21% of the spacecraft mass, and holes punctured in the balloon by micrometeoroids allowed that gas to escape, gradually reducing the spacecraft mass over time. The authors found that a good model was that the balloon's total mass decreased by 0.64 lb/day for the first 13 days, and 0.16 lb/day after that.
 
 To model the decreasing mass, we will make a couple of propagation loops where the mass is reduced by a small fraction each day. In your script file, replace the existing mission sequence part (at the very end) with this.
 

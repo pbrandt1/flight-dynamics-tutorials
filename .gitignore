@@ -2,3 +2,4 @@ node_modules/
 maybe-later/
 *.bak
 *.swp
+*.bsp

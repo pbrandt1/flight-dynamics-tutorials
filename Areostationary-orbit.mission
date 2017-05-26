@@ -1,0 +1,211 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2017-05-26 16:30:15
+
+
+%----------------------------------------
+%---------- Solar System User-Modified Values
+%----------------------------------------
+
+GMAT SolarSystem.EphemerisSource = 'SPICE';
+GMAT SolarSystem.SPKFilename = '/home/peter/code/flight-dynamics-tutorials/mar097.bsp';
+
+%----------------------------------------
+%---------- User-Defined Celestial Bodies
+%----------------------------------------
+
+Create Moon Phobos;
+GMAT Phobos.NAIFId = 401;
+GMAT Phobos.OrbitColor = Tan;
+GMAT Phobos.TargetColor = DarkGray;
+GMAT Phobos.EquatorialRadius = 13.5;
+GMAT Phobos.Flattening = 0.3185185185185186;
+GMAT Phobos.Mu = 0.0007093399;
+GMAT Phobos.PosVelSource = 'SPICE';
+GMAT Phobos.CentralBody = 'Mars';
+GMAT Phobos.RotationDataSource = 'IAUSimplified';
+GMAT Phobos.OrientationEpoch = 21545;
+GMAT Phobos.SpinAxisRAConstant = 0;
+GMAT Phobos.SpinAxisRARate = -0.641;
+GMAT Phobos.SpinAxisDECConstant = 90;
+GMAT Phobos.SpinAxisDECRate = -0.5570000000000001;
+GMAT Phobos.RotationConstant = 190.147;
+GMAT Phobos.RotationRate = 360.9856235;
+GMAT Phobos.TextureMapFileName = 'GenericCelestialBody.jpg';
+GMAT Phobos.3DModelFile = '';
+GMAT Phobos.3DModelOffsetX = 0;
+GMAT Phobos.3DModelOffsetY = 0;
+GMAT Phobos.3DModelOffsetZ = 0;
+GMAT Phobos.3DModelRotationX = 0;
+GMAT Phobos.3DModelRotationY = 0;
+GMAT Phobos.3DModelRotationZ = 0;
+GMAT Phobos.3DModelScale = 10;
+
+Create Moon Deimos;
+GMAT Deimos.NAIFId = 402;
+GMAT Deimos.OrbitColor = Tan;
+GMAT Deimos.TargetColor = DarkGray;
+GMAT Deimos.EquatorialRadius = 7.5;
+GMAT Deimos.Flattening = 0.0033527;
+GMAT Deimos.Mu = 0.0001588174;
+GMAT Deimos.PosVelSource = 'SPICE';
+GMAT Deimos.CentralBody = 'Mars';
+GMAT Deimos.RotationDataSource = 'IAUSimplified';
+GMAT Deimos.OrientationEpoch = 21545;
+GMAT Deimos.SpinAxisRAConstant = 0;
+GMAT Deimos.SpinAxisRARate = -0.641;
+GMAT Deimos.SpinAxisDECConstant = 90;
+GMAT Deimos.SpinAxisDECRate = -0.5570000000000001;
+GMAT Deimos.RotationConstant = 190.147;
+GMAT Deimos.RotationRate = 360.9856235;
+GMAT Deimos.TextureMapFileName = 'GenericCelestialBody.jpg';
+GMAT Deimos.3DModelFile = '';
+GMAT Deimos.3DModelOffsetX = 0;
+GMAT Deimos.3DModelOffsetY = 0;
+GMAT Deimos.3DModelOffsetZ = 0;
+GMAT Deimos.3DModelRotationX = 0;
+GMAT Deimos.3DModelRotationY = 0;
+GMAT Deimos.3DModelRotationZ = 0;
+GMAT Deimos.3DModelScale = 10;
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft DefaultSC;
+GMAT DefaultSC.DateFormat = TAIModJulian;
+GMAT DefaultSC.Epoch = '21545';
+GMAT DefaultSC.CoordinateSystem = MarsFixed;
+GMAT DefaultSC.DisplayStateType = Cartesian;
+GMAT DefaultSC.X = 20426.1885143645;
+GMAT DefaultSC.Y = -0.3991204784720708;
+GMAT DefaultSC.Z = 0.5288805306862514;
+GMAT DefaultSC.VX = -2.84268982913248e-05;
+GMAT DefaultSC.VY = 5.750597443143768e-05;
+GMAT DefaultSC.VZ = -3.743927932120528e-07;
+GMAT DefaultSC.DryMass = 850;
+GMAT DefaultSC.Cd = 2.2;
+GMAT DefaultSC.Cr = 1.8;
+GMAT DefaultSC.DragArea = 15;
+GMAT DefaultSC.SRPArea = 1;
+GMAT DefaultSC.NAIFId = -10000001;
+GMAT DefaultSC.NAIFIdReferenceFrame = -9000001;
+GMAT DefaultSC.OrbitColor = Red;
+GMAT DefaultSC.TargetColor = Teal;
+GMAT DefaultSC.EstimationStateType = 'Cartesian';
+GMAT DefaultSC.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT DefaultSC.CdSigma = 1e+70;
+GMAT DefaultSC.CrSigma = 1e+70;
+GMAT DefaultSC.Id = 'SatId';
+GMAT DefaultSC.Attitude = CoordinateSystemFixed;
+GMAT DefaultSC.SPADSRPScaleFactor = 1;
+GMAT DefaultSC.ModelFile = 'aura.3ds';
+GMAT DefaultSC.ModelOffsetX = 0;
+GMAT DefaultSC.ModelOffsetY = 0;
+GMAT DefaultSC.ModelOffsetZ = 0;
+GMAT DefaultSC.ModelRotationX = 0;
+GMAT DefaultSC.ModelRotationY = 0;
+GMAT DefaultSC.ModelRotationZ = 0;
+GMAT DefaultSC.ModelScale = 1;
+GMAT DefaultSC.AttitudeDisplayStateType = 'Quaternion';
+GMAT DefaultSC.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT DefaultSC.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT DefaultSC.EulerAngleSequence = '321';
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel DefaultProp_ForceModel;
+GMAT DefaultProp_ForceModel.CentralBody = Mars;
+GMAT DefaultProp_ForceModel.PrimaryBodies = {Mars};
+GMAT DefaultProp_ForceModel.PointMasses = {Deimos, Phobos};
+GMAT DefaultProp_ForceModel.Drag = None;
+GMAT DefaultProp_ForceModel.SRP = Off;
+GMAT DefaultProp_ForceModel.RelativisticCorrection = Off;
+GMAT DefaultProp_ForceModel.ErrorControl = RSSStep;
+GMAT DefaultProp_ForceModel.GravityField.Mars.Degree = 4;
+GMAT DefaultProp_ForceModel.GravityField.Mars.Order = 4;
+GMAT DefaultProp_ForceModel.GravityField.Mars.PotentialFile = 'Mars50c.cof';
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator DefaultProp;
+GMAT DefaultProp.FM = DefaultProp_ForceModel;
+GMAT DefaultProp.Type = RungeKutta89;
+GMAT DefaultProp.InitialStepSize = 60;
+GMAT DefaultProp.Accuracy = 9.999999999999999e-12;
+GMAT DefaultProp.MinStep = 0.001;
+GMAT DefaultProp.MaxStep = 2700;
+GMAT DefaultProp.MaxStepAttempts = 50;
+GMAT DefaultProp.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Coordinate Systems
+%----------------------------------------
+
+Create CoordinateSystem MarsFixed;
+GMAT MarsFixed.Origin = Mars;
+GMAT MarsFixed.Axes = BodyFixed;
+
+Create CoordinateSystem MarsInertial;
+GMAT MarsInertial.Origin = Mars;
+GMAT MarsInertial.Axes = BodyInertial;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView DefaultOrbitView;
+GMAT DefaultOrbitView.SolverIterations = Current;
+GMAT DefaultOrbitView.UpperLeft = [ 0.1446428571428572 0.03629976580796253 ];
+GMAT DefaultOrbitView.Size = [ 0.9964285714285714 0.9601873536299765 ];
+GMAT DefaultOrbitView.RelativeZOrder = 164;
+GMAT DefaultOrbitView.Maximized = true;
+GMAT DefaultOrbitView.Add = {DefaultSC, Mars, Deimos, Phobos};
+GMAT DefaultOrbitView.CoordinateSystem = MarsInertial;
+GMAT DefaultOrbitView.DrawObject = [ true true true true ];
+GMAT DefaultOrbitView.DataCollectFrequency = 1;
+GMAT DefaultOrbitView.UpdatePlotFrequency = 50;
+GMAT DefaultOrbitView.NumPointsToRedraw = 0;
+GMAT DefaultOrbitView.ShowPlot = true;
+GMAT DefaultOrbitView.ShowLabels = true;
+GMAT DefaultOrbitView.ViewPointReference = Mars;
+GMAT DefaultOrbitView.ViewPointVector = [ 0 0 70000 ];
+GMAT DefaultOrbitView.ViewDirection = Mars;
+GMAT DefaultOrbitView.ViewScaleFactor = 1;
+GMAT DefaultOrbitView.ViewUpCoordinateSystem = MarsFixed;
+GMAT DefaultOrbitView.ViewUpAxis = Z;
+GMAT DefaultOrbitView.EclipticPlane = Off;
+GMAT DefaultOrbitView.XYPlane = On;
+GMAT DefaultOrbitView.WireFrame = Off;
+GMAT DefaultOrbitView.Axes = On;
+GMAT DefaultOrbitView.Grid = Off;
+GMAT DefaultOrbitView.SunLine = Off;
+GMAT DefaultOrbitView.UseInitialView = On;
+GMAT DefaultOrbitView.StarCount = 7000;
+GMAT DefaultOrbitView.EnableStars = Off;
+GMAT DefaultOrbitView.EnableConstellations = On;
+
+Create GroundTrackPlot DefaultGroundTrackPlot;
+GMAT DefaultGroundTrackPlot.SolverIterations = Current;
+GMAT DefaultGroundTrackPlot.UpperLeft = [ 0.1446428571428572 0.03629976580796253 ];
+GMAT DefaultGroundTrackPlot.Size = [ 0.9964285714285714 0.9601873536299765 ];
+GMAT DefaultGroundTrackPlot.RelativeZOrder = 195;
+GMAT DefaultGroundTrackPlot.Maximized = true;
+GMAT DefaultGroundTrackPlot.Add = {DefaultSC, Earth};
+GMAT DefaultGroundTrackPlot.DataCollectFrequency = 1;
+GMAT DefaultGroundTrackPlot.UpdatePlotFrequency = 50;
+GMAT DefaultGroundTrackPlot.NumPointsToRedraw = 0;
+GMAT DefaultGroundTrackPlot.ShowPlot = true;
+GMAT DefaultGroundTrackPlot.CentralBody = Mars;
+GMAT DefaultGroundTrackPlot.TextureMap = 'Mars_JPLCaltechUSGS.jpg';
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Propagate DefaultProp(DefaultSC) {DefaultSC.ElapsedSecs = 88775};

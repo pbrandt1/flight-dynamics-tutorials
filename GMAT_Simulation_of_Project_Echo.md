@@ -210,7 +210,7 @@ CSV_HEADER = 'DefaultSC.UTCGregorian,DefaultSC.Earth.ECC'
 
 BeginMissionSequence
 
-% After BeginMissionSequence you can do math, though you can't in-line them
+% After BeginMissionSequence you can do math, though you cannot in-line them
 ONE_DAY = 24 * 60 * 60
 T = 0
 

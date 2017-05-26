@@ -1,0 +1,152 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2017-05-26 06:30:07
+
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft DefaultSC;
+GMAT DefaultSC.DateFormat = TAIModJulian;
+GMAT DefaultSC.Epoch = '7158.90787';
+GMAT DefaultSC.CoordinateSystem = EarthMJ2000Eq;
+GMAT DefaultSC.DisplayStateType = Keplerian;
+GMAT DefaultSC.SMA = 7980;
+GMAT DefaultSC.ECC = 0.01028999999999994;
+GMAT DefaultSC.INC = 47.23200000000001;
+GMAT DefaultSC.RAAN = 254.987;
+GMAT DefaultSC.AOP = 17.68499999999843;
+GMAT DefaultSC.TA = 137.6520000000015;
+GMAT DefaultSC.DryMass = 71.40000000000001;
+GMAT DefaultSC.Cd = 2.2;
+GMAT DefaultSC.Cr = 1.0;
+GMAT DefaultSC.DragArea = 730;
+GMAT DefaultSC.SRPArea = 730;
+GMAT DefaultSC.NAIFId = -10000001;
+GMAT DefaultSC.NAIFIdReferenceFrame = -9000001;
+GMAT DefaultSC.OrbitColor = Red;
+GMAT DefaultSC.TargetColor = Teal;
+GMAT DefaultSC.EstimationStateType = 'Cartesian';
+GMAT DefaultSC.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT DefaultSC.CdSigma = 1e+70;
+GMAT DefaultSC.CrSigma = 1e+70;
+GMAT DefaultSC.Id = 'SatId';
+GMAT DefaultSC.Attitude = CoordinateSystemFixed;
+GMAT DefaultSC.SPADSRPScaleFactor = 1;
+GMAT DefaultSC.ModelFile = 'aura.3ds';
+GMAT DefaultSC.ModelOffsetX = 0;
+GMAT DefaultSC.ModelOffsetY = 0;
+GMAT DefaultSC.ModelOffsetZ = 0;
+GMAT DefaultSC.ModelRotationX = 0;
+GMAT DefaultSC.ModelRotationY = 0;
+GMAT DefaultSC.ModelRotationZ = 0;
+GMAT DefaultSC.ModelScale = 1;
+GMAT DefaultSC.AttitudeDisplayStateType = 'Quaternion';
+GMAT DefaultSC.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT DefaultSC.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT DefaultSC.EulerAngleSequence = '321';
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel DefaultProp_ForceModel;
+GMAT DefaultProp_ForceModel.CentralBody = Earth;
+GMAT DefaultProp_ForceModel.PrimaryBodies = {Earth};
+GMAT DefaultProp_ForceModel.PointMasses = {Luna, Sun};
+GMAT DefaultProp_ForceModel.SRP = On;
+GMAT DefaultProp_ForceModel.RelativisticCorrection = Off;
+GMAT DefaultProp_ForceModel.ErrorControl = RSSStep;
+GMAT DefaultProp_ForceModel.GravityField.Earth.Degree = 10;
+GMAT DefaultProp_ForceModel.GravityField.Earth.Order = 10;
+GMAT DefaultProp_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+GMAT DefaultProp_ForceModel.GravityField.Earth.EarthTideModel = 'None';
+GMAT DefaultProp_ForceModel.Drag.AtmosphereModel = JacchiaRoberts;
+GMAT DefaultProp_ForceModel.Drag.HistoricWeatherSource = 'CSSISpaceWeatherFile';
+GMAT DefaultProp_ForceModel.Drag.PredictedWeatherSource = 'ConstantFluxAndGeoMag';
+GMAT DefaultProp_ForceModel.Drag.CSSISpaceWeatherFile = '/home/peter/code/flight-dynamics-tutorials/sw19571001.txt';
+GMAT DefaultProp_ForceModel.Drag.SchattenFile = 'SchattenPredict.txt';
+GMAT DefaultProp_ForceModel.Drag.F107 = 150;
+GMAT DefaultProp_ForceModel.Drag.F107A = 150;
+GMAT DefaultProp_ForceModel.Drag.MagneticIndex = 3;
+GMAT DefaultProp_ForceModel.Drag.SchattenErrorModel = 'Nominal';
+GMAT DefaultProp_ForceModel.Drag.SchattenTimingModel = 'NominalCycle';
+GMAT DefaultProp_ForceModel.SRP.Flux = 1367;
+GMAT DefaultProp_ForceModel.SRP.SRPModel = Spherical;
+GMAT DefaultProp_ForceModel.SRP.Nominal_Sun = 149597870.691;
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator DefaultProp;
+GMAT DefaultProp.FM = DefaultProp_ForceModel;
+GMAT DefaultProp.Type = RungeKutta89;
+GMAT DefaultProp.InitialStepSize = 60;
+GMAT DefaultProp.Accuracy = 9.999999999999999e-12;
+GMAT DefaultProp.MinStep = 0.001;
+GMAT DefaultProp.MaxStep = 2700;
+GMAT DefaultProp.MaxStepAttempts = 50;
+GMAT DefaultProp.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create ReportFile ReportFile1;
+GMAT ReportFile1.SolverIterations = Current;
+GMAT ReportFile1.UpperLeft = [ 0 0 ];
+GMAT ReportFile1.Size = [ 0 0 ];
+GMAT ReportFile1.RelativeZOrder = 0;
+GMAT ReportFile1.Maximized = false;
+GMAT ReportFile1.Filename = '/home/peter/code/flight-dynamics-tutorials/output/Echo-150-days.csv';
+GMAT ReportFile1.Precision = 16;
+GMAT ReportFile1.Add = {DefaultSC.UTCGregorian, DefaultSC.Earth.ECC};
+GMAT ReportFile1.LeftJustify = On;
+GMAT ReportFile1.ZeroFill = Off;
+GMAT ReportFile1.FixedWidth = false;
+GMAT ReportFile1.Delimiter = ',';
+GMAT ReportFile1.WriteReport = false;
+GMAT ReportFile1.WriteHeaders = false;
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+% Create all variables before BeginMissionSequence
+Create Variable ONE_DAY T SEGMENT_END MIN_MASS
+Create String CSV_HEADER
+CSV_HEADER = 'DefaultSC.UTCGregorian,DefaultSC.Earth.ECC'
+
+BeginMissionSequence
+
+% After BeginMissionSequence you can do math, though you can't in-line them
+ONE_DAY = 24 * 60 * 60
+T = 0
+
+% MIN_MASS is the minimum mass of echo I, which is 79% of the initial mass because 21% is the inflation gas
+MIN_MASS = 0.79 * DefaultSC.DryMass
+
+% initialize report
+Report ReportFile1 CSV_HEADER
+Report ReportFile1 DefaultSC.UTCGregorian DefaultSC.Earth.ECC
+
+% Propogate the the first 13 days losing 0.3 kg/day
+SEGMENT_END = ONE_DAY * 13
+While T < SEGMENT_END
+  Propagate DefaultProp(DefaultSC) {DefaultSC.ElapsedSecs = ONE_DAY}
+  T = T + ONE_DAY
+  DefaultSC.DryMass = DefaultSC.DryMass - 0.3
+  Report ReportFile1 DefaultSC.UTCGregorian DefaultSC.Earth.ECC
+EndWhile
+
+% Propogate until day 150 losing 0.07 kg/day until all gas is depleted
+SEGMENT_END = ONE_DAY * 150
+While T < SEGMENT_END
+  Propagate DefaultProp(DefaultSC) {DefaultSC.ElapsedSecs = ONE_DAY}
+  T = T + ONE_DAY
+  If DefaultSC.DryMass > MIN_MASS
+    DefaultSC.DryMass = DefaultSC.DryMass - 0.07
+  EndIf
+  Report ReportFile1 DefaultSC.UTCGregorian DefaultSC.Earth.ECC
+EndWhile

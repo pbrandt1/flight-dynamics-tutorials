@@ -1,0 +1,14 @@
+.groundtrack {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+footer {
+  margin-top: 100px;
+  color: rgba(0,0,0,0.5);
+  font-size: small;
+}
+
+pre {
+  color: rgba(0,0,0,0.6);
+}

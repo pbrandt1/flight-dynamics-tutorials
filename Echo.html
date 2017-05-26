@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>GMAT Simulation of Project Echo | Plotly Output</title>
+  <meta name="description" content="Plots from https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/GMAT_Simulation_of_Project_Echo.md">
+  <meta name="author" content="Peter Brandt">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/skeleton.css">
+  <link rel="stylesheet" href="/css/styles.css">
+
+  <!-- JAVA MCJAVASCRIPT -->
+  <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.js" type="text/javascript"></script>
+  <script src="//cdn.plot.ly/plotly-latest.min.js" type="text/javascript"></script> -->
+  <script src="/plotly-latest.min.js" type="text/javascript"></script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+  <link rel="manifest" href="/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<div class="container">
+  <h2>GMAT Simulation of Project Echo</h2>
+
+  <hr>
+
+  <h3>Plotting the Ground Track with Plot.ly</h3>
+
+  <div class="groundtrack" id="echo_ground_track"></div>
+
+  <p>
+    Above should be a plot of the ground track of one orbit of the first Project
+    Echo satellite, which was launched on August 12 1960. Try dragging and
+    scrolling the map.
+  </p>
+
+  <hr>
+
+  <h3>Comparison with Echo 1 Observations</h3>
+
+  <div class="linechart" id="echo_eccentricity"></div>
+
+  <p>
+    After completing the last part of the tutorial, above should be a plot of
+    how Echo's eccentricity varied over the first 150 days in orbit. The orange line is the observed
+    values, and the blue line is the simulated values.
+  </p>
+
+  <hr>
+
+  <footer>
+    © Peter Brandt 2017
+    | <a href="https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/GMAT_Simulation_of_Project_Echo.md" target="blank">github.com/pbrandt1/flight-dynamics-tutorials</a>
+    | Code released under the <a href="https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/LICENSE_MIT" target="blank">MIT license</a>
+    | Written content released under the <a href="https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/LICENSE_CC" target="blank">Creative Commons Attribution license</a> by Peter Brandt
+  </footer>
+
+  <script type="text/javascript" src="/Echo.js"></script>
+</div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

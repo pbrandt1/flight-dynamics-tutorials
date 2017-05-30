@@ -7,7 +7,7 @@
 - External plotting and charting
 - GMAT command line
 
-## [Areostationary Communications Satellite (Mars)](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/Areostationary_Communications_Satellite.md)
+## [Mars Stationary Satellite](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/Mars_Stationary_Satellite.md)
 
 - Mars gravity model
 - Plotting satellite coverage

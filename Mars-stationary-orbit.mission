@@ -31,7 +31,7 @@ GMAT Phobos.SpinAxisDECRate = -0.5570000000000001;
 GMAT Phobos.RotationConstant = 190.147;
 GMAT Phobos.RotationRate = 360.9856235;
 GMAT Phobos.TextureMapFileName = 'GenericCelestialBody.jpg';
-GMAT Phobos.3DModelFile = '';
+GMAT Phobos.3DModelFile = '/home/peter/Downloads/GMAT/R2016a/data/graphics/models/Comet_Hartley_Green.3ds';
 GMAT Phobos.3DModelOffsetX = 0;
 GMAT Phobos.3DModelOffsetY = 0;
 GMAT Phobos.3DModelOffsetZ = 0;
@@ -111,6 +111,8 @@ GMAT DefaultSC.AttitudeRateDisplayStateType = 'AngularVelocity';
 GMAT DefaultSC.AttitudeCoordinateSystem = EarthMJ2000Eq;
 GMAT DefaultSC.EulerAngleSequence = '321';
 
+
+
 %----------------------------------------
 %---------- ForceModels
 %----------------------------------------
@@ -154,6 +156,25 @@ GMAT MarsInertial.Origin = Mars;
 GMAT MarsInertial.Axes = BodyInertial;
 
 %----------------------------------------
+%---------- EventLocators
+%----------------------------------------
+
+Create EclipseLocator EclipseLocator1;
+GMAT EclipseLocator1.Spacecraft = DefaultSC;
+GMAT EclipseLocator1.Filename = 'EclipseLocator1.txt';
+GMAT EclipseLocator1.OccultingBodies = {Deimos, Mars, Phobos};
+GMAT EclipseLocator1.InputEpochFormat = 'TAIModJulian';
+GMAT EclipseLocator1.InitialEpoch = '21545';
+GMAT EclipseLocator1.StepSize = 10;
+GMAT EclipseLocator1.FinalEpoch = '21545.138';
+GMAT EclipseLocator1.UseLightTimeDelay = true;
+GMAT EclipseLocator1.UseStellarAberration = true;
+GMAT EclipseLocator1.WriteReport = true;
+GMAT EclipseLocator1.RunMode = Automatic;
+GMAT EclipseLocator1.UseEntireInterval = true;
+GMAT EclipseLocator1.EclipseTypes = {'Umbra', 'Penumbra', 'Antumbra'};
+
+%----------------------------------------
 %---------- Subscribers
 %----------------------------------------
 
@@ -161,7 +182,7 @@ Create OrbitView DefaultOrbitView;
 GMAT DefaultOrbitView.SolverIterations = Current;
 GMAT DefaultOrbitView.UpperLeft = [ 0.1446428571428572 0.03629976580796253 ];
 GMAT DefaultOrbitView.Size = [ 0.9964285714285714 0.9601873536299765 ];
-GMAT DefaultOrbitView.RelativeZOrder = 164;
+GMAT DefaultOrbitView.RelativeZOrder = 16;
 GMAT DefaultOrbitView.Maximized = true;
 GMAT DefaultOrbitView.Add = {DefaultSC, Mars, Deimos, Phobos};
 GMAT DefaultOrbitView.CoordinateSystem = MarsInertial;
@@ -192,7 +213,7 @@ Create GroundTrackPlot DefaultGroundTrackPlot;
 GMAT DefaultGroundTrackPlot.SolverIterations = Current;
 GMAT DefaultGroundTrackPlot.UpperLeft = [ 0.1446428571428572 0.03629976580796253 ];
 GMAT DefaultGroundTrackPlot.Size = [ 0.9964285714285714 0.9601873536299765 ];
-GMAT DefaultGroundTrackPlot.RelativeZOrder = 195;
+GMAT DefaultGroundTrackPlot.RelativeZOrder = 11;
 GMAT DefaultGroundTrackPlot.Maximized = true;
 GMAT DefaultGroundTrackPlot.Add = {DefaultSC, Earth};
 GMAT DefaultGroundTrackPlot.DataCollectFrequency = 1;
@@ -208,4 +229,4 @@ GMAT DefaultGroundTrackPlot.TextureMap = 'Mars_JPLCaltechUSGS.jpg';
 %----------------------------------------
 
 BeginMissionSequence;
-Propagate DefaultProp(DefaultSC) {DefaultSC.ElapsedSecs = 88775};
+Propagate DefaultProp(DefaultSC) {DefaultSC.ElapsedSecs = 887750};

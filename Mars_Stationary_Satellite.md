@@ -217,13 +217,15 @@ Open up the GMAT GUI again and let's add in an `EclipseLocator` object. Nice to 
 
 Run your mission, and check out the file you generated, which is a table of all the eclipses. All the way at the bottom of the file should be a summary including the max eclipse time, which should be about 4803 seconds, or only 1 hour and 20 minutes long.
 
-Also every year there are a couple of weeks where the Sun is between Mars and the Earth, which interferes with communication signals. We need to know when this is, though it really should be something of a public record and you wouldn't need to calculate it every time you were doing some analysis for a mission. Whoa. Hey. We can do that now. We can publish a list of all periods in which the Sun is between the Earth and Mars, make a website for it, and let people google it. SunMarsConjunctions.com, it's going to be great.
+<!-- Also every year there are a couple of weeks where the Sun is between Mars and the Earth, which interferes with communication signals. We need to know when this is, though it really should be something of a public record and you wouldn't need to calculate it every time you were doing some analysis for a mission. Whoa. Hey. We can do that now. We can publish a list of all periods in which the Sun is between the Earth and Mars, make a website for it, and let people google it. SunMarsConjunctions.com, it's going to be great.
 
-Instead of drawing diagrams and writing some buggy code where we fuck up some asines, let's use GMAT. Or another thing that we could do is look it up online and see if it exists because i really don't want to do this.
+Instead of drawing diagrams and writing some buggy code where we fuck up some asines, let's use GMAT. Or another thing that we could do is look it up online and see if it exists because i really don't want to do this. -->
 
 ## Conclusions
 
-We demonstrated the stable longitudes for a satellite in Mars stationary orbit. We plotted the coverage area, calculated the eclipses, and
+We demonstrated the stable longitudes for a satellite in Mars stationary orbit. We plotted the coverage area in modern tools to see what possible sites for missions in the 2020's a single stationary satellite could support. A single Mars stationary satellite cannot support both the planned NASA and ESA mission sites in the 2020's. We calculated the eclipses for the satellite and determined that they were not as bad as the eclipses that Earth stationary satellites endure. My conclusion is that a Mars stationary satellite could be a good idea for the 3030's if there is more of a consensus around which part of Mars to explore and develop.
+
+For further analysis, we could to determine the amount of fuel required to place a spacecraft in a Mars stationary orbit.
 
 ### Interesting Links
 

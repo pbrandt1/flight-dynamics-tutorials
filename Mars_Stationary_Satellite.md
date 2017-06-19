@@ -5,11 +5,9 @@ A satellite in Mars stationary orbit.
 ## Table of Contents
 
 - Mars gravity model
+- Stable/unstable equilibrium orbits
 - Plotting satellite coverage
 - Eclipses
-- Occultations
-- Deep space network communication
-- Station keeping maneuvers
 
 
 ## Mars Stationary Orbit

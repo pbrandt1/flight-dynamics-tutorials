@@ -10,9 +10,11 @@
 ## [Mars Stationary Satellite](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/Mars_Stationary_Satellite.md)
 
 - Mars gravity model
+- Stable/unstable equilibrium orbits
 - Plotting satellite coverage
-- Deep space network communication
-- Station keeping maneuvers
+- Eclipses
+<!-- - Deep space network communication
+- Station keeping maneuvers -->
 
 ### License
 

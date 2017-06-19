@@ -204,6 +204,7 @@ Create Variable MARS_DAY T SEGMENT_END;
 Create String CSV_HEADER;
 GMAT CSV_HEADER = 'DefaultSC.UTCGregorian,DefaultSC.Mars.Latitude,DefaultSC.Mars.Longitude';
 
+
 %----------------------------------------
 %---------- Mission Sequence
 %----------------------------------------

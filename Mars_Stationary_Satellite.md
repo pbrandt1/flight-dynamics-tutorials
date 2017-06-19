@@ -112,7 +112,7 @@ Run the mission. In the graphics window you should see the orbit of the satellit
 
 ![Stationary satellite around Mars, with Phobos and Deimos orbits included](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/output/Mars-stationary-phobos-deimos.gif)
 
-Looks pretty good, but let's take a look at the actual data and see what's going on. Set up a report file and propagate for a while. This is the point that I usually drop the GUI and start editing the code for a mission with a text editor.
+Looks pretty good, but let's take a look at the actual data and see what's going on. Set up a report file and propagate for a while.
 
 ```c
 %----------------------------------------
@@ -126,6 +126,7 @@ GMAT ReportFile1.Size = [ 0 0 ];
 GMAT ReportFile1.RelativeZOrder = 0;
 GMAT ReportFile1.Maximized = false;
 GMAT ReportFile1.Filename = '/home/peter/code/flight-dynamics-tutorials/output/Mars-stationary-satellite.csv';
+
 GMAT ReportFile1.Precision = 16;
 GMAT ReportFile1.Add = {DefaultSC.UTCGregorian, DefaultSC.Mars.Latitude, DefaultSC.Mars.Longitude};
 GMAT ReportFile1.WriteHeaders = false;
@@ -211,7 +212,7 @@ Run your mission, and check out the file you generated, which is a table of all 
 
 Also every year there are a couple of weeks where the Sun is between Mars and the Earth, which interferes with communication signals. We need to know when this is, though it really should be something of a public record and you wouldn't need to calculate it every time you were doing some analysis for a mission. Whoa. Hey. We can do that now. We can publish a list of all periods in which the Sun is between the Earth and Mars, make a website for it, and let people google it. SunMarsConjunctions.com, it's going to be great.
 
-Instead of drawing diagrams and writing some buggy code where we fuck up some asines, let's use GMAT. Or another thing that we could do is look it up online and see if it exists because i really don't want to do this. 
+Instead of drawing diagrams and writing some buggy code where we fuck up some asines, let's use GMAT. Or another thing that we could do is look it up online and see if it exists because i really don't want to do this.
 
 ## Conclusions
 

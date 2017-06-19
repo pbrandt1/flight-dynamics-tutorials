@@ -194,7 +194,14 @@ Satellite coverage is not super interesting for a Mars mission unless you know w
 
 This is going to be fun. We'll plot Mars with Leaflet and then you can drag the satellites coverage zone around on the map to see what you can hit. If you find a spot you think is perfect, IDK, post it to reddit or something :).
 
-For this, we're using the same tiles as the NASA Mars Trek map. If you want to read a little more about different maps of Mars, you can read my [blog post about them](). Maps. They're all we have right now. Literal representations of our hopes and dreams, plotting out scientific treasure, identifying places we'd like to live, visualizing the paradise it could turn into some day.
+For this, we're using tiles from Mapbox. If you want to read a little more about different maps of Mars, you can read my [blog post about them](https://peterbrandt.space/blog/2016-01-01-Modern-Maps-of-Mars). For this tutorial, you can run your own map by running the command below in the root of this repository.
+
+```
+python -m SimpleHTTPServer 9966
+```
+
+Then go to http://localhost:9966/Mars.html
+
 
 ## Eclipses
 

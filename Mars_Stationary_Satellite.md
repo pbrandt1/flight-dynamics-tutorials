@@ -188,11 +188,9 @@ r: orbital radius (20,427 km for Mars stationary orbit)
 α = 70.59°
 ```
 
-Satellite coverage is not super interesting for a Mars mission unless you know what you want to be covering. Let's use something I made along time ago: a catalog of the exploration zones proposed at a conference in 2016 (wow waaaay back). We'll see how many of the top candidates we can hit with one Mars stationary satellite.
+Satellite coverage is not super interesting for a Mars mission unless you know what you want to be covering. We'll plot the locations of some upcoming missions to Mars with Leaflet and then you can drag the satellites coverage zone around on the map to see what you can hit. If you find a spot you think is perfect, IDK, post it to reddit or something :).
 
-This is going to be fun. We'll plot Mars with Leaflet and then you can drag the satellites coverage zone around on the map to see what you can hit. If you find a spot you think is perfect, IDK, post it to reddit or something :).
-
-For this, we're using tiles from Mapbox. If you want to read a little more about different maps of Mars, you can read my [blog post about them](https://peterbrandt.space/blog/2016-01-01-Modern-Maps-of-Mars). For this tutorial, you can run your own map by running the command below in the root of this repository.
+For this, we're using tiles from Mapbox. If you want to read a little more about different maps of Mars, you can read my [blog post about them](https://peterbrandt.space/blog/2016-01-01-Modern-Maps-of-Mars) (currently under construction). For this tutorial, you can run your own map by running the command below in the root of this repository.
 
 ```
 python -m SimpleHTTPServer 9966

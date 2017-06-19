@@ -7,6 +7,13 @@
 - External plotting and charting
 - GMAT command line
 
+## [Mars Stationary Satellite](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/Mars_Stationary_Satellite.md)
+
+- Mars gravity model
+- Plotting satellite coverage
+- Deep space network communication
+- Station keeping maneuvers
+
 ### License
 
 Source code is licensed under the [MIT license](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/LICENSE_MIT), and written content is licensed under the [Creative Commons Attribution license](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/LICENSE_CC) by Peter Brandt.

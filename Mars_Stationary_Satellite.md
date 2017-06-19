@@ -200,8 +200,9 @@ For this, we're using tiles from Mapbox. If you want to read a little more about
 python -m SimpleHTTPServer 9966
 ```
 
-Then go to http://localhost:9966/Mars.html
+Then go to http://localhost:9966/Mars.html. You should see something like this:
 
+![Mars stationary satellite coverage with Leaflet](http://i.imgur.com/BcaGehN.png)
 
 ## Eclipses
 

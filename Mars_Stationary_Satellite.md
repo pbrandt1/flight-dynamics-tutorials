@@ -12,7 +12,7 @@ A satellite in Mars stationary orbit.
 
 ## Mars Stationary Orbit
 
-A stationary orbit is one where a satellite orbits around the planet at the same speed at which the planet itself rotates, causing the satellite to appear stationary in the sky above one part of the planet. The comsat industry calls them geostationary or geosynchronous satellites; geo_stationary_ is a geo_synchronous_ orbit at the equator, but almost all geosynchronous satellites are geostationary so the two words have sort of become synonyms in the industry. People usually abbreviate both to GEO, but sometimes you'll see GSO used. Science fiction fans sometimes call them "Clarke" orbits, named after the science fiction author to propose them. On Mars they could be called "areostationary" orbits, but I prefer "Mars stationary." To calculate the orbital radius `r` for a Mars stationary orbit, set the downward acceleration due to gravity equal to the centripetal acceleration of the satellite moving in a circle with the same rotational speed as Mars, `ω`.
+A geostationary satellite is located at the equator and orbits around Earth exactly once per day, causing the satellite to appear stationary in the sky. Other terms include geosynchronous, which is technically not equatorial but in practice used interchangeably with geostationary, GEO, GSO, and Clarke orbits. On Mars they could be called "areostationary" orbits, but I prefer "Mars stationary." To calculate the orbital radius `r` for a Mars stationary orbit, set the downward acceleration due to gravity equal to the centripetal acceleration of the satellite moving in a circle with the same rotational speed as Mars, `ω`.
 
 ```
 gravity = centripetal acceleration
@@ -108,7 +108,7 @@ Now you'll need ephemeris data for them. Go to https://naif.jpl.nasa.gov/pub/nai
 
 Run the mission. In the graphics window you should see the orbit of the satellite as well as the orbits of Phobos (inner orbit) and Deimos (outer orbit).
 
-![Stationary satellite around Mars, with Phobos and Deimos orbits included](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/output/Mars-stationary-phobos-deimos.gif)
+![Stationary satellite around Mars, with Phobos and Deimos orbits included](http://imgur.com/a/Itf7C)
 
 Looks pretty good, but let's take a look at the actual data and see what's going on. Set up a report file and propagate for a while.
 
@@ -220,7 +220,7 @@ Instead of drawing diagrams and writing some buggy code where we fuck up some as
 
 ## Conclusions
 
-We demonstrated the stable longitudes for a satellite in Mars stationary orbit. We plotted the coverage area in modern tools to see what possible sites for missions in the 2020's a single stationary satellite could support. A single Mars stationary satellite cannot support both the planned NASA and ESA mission sites in the 2020's. We calculated the eclipses for the satellite and determined that they were not as bad as the eclipses that Earth stationary satellites endure. My conclusion is that a Mars stationary satellite could be a good idea for the 3030's if there is more of a consensus around which part of Mars to explore and develop.
+We demonstrated the stable longitudes for a satellite in Mars stationary orbit. We plotted the coverage area in modern tools to see what possible sites for missions in the 2020's a single stationary satellite could support. A single Mars stationary satellite placed at the stable 167.83 longitude could support 3 missions: the Curiosity rover at Gale crater, the Insight lander at Elysium Planitia, and the Mars 2020 rover at Columbia Hills if that site is chosen. We calculated the eclipses for the satellite and determined that they were not as bad as the eclipses that Earth stationary satellites endure.
 
 For further analysis, we could to determine the amount of fuel required to place a spacecraft in a Mars stationary orbit.
 

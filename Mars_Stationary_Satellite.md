@@ -108,7 +108,7 @@ Now you'll need ephemeris data for them. Go to https://naif.jpl.nasa.gov/pub/nai
 
 Run the mission. In the graphics window you should see the orbit of the satellite as well as the orbits of Phobos (inner orbit) and Deimos (outer orbit).
 
-![Stationary satellite around Mars, with Phobos and Deimos orbits included](http://imgur.com/a/Itf7C)
+![Stationary satellite around Mars, with Phobos and Deimos orbits included](http://i.imgur.com/lnsv9uc.gif)
 
 Looks pretty good, but let's take a look at the actual data and see what's going on. Set up a report file and propagate for a while.
 

@@ -20,11 +20,17 @@ A GMAT flight dynamics tutorial.
 
 Echo 1 was launched at 5:39 AM EDT on 12 August 1960, and at 7:41 AM it reflected its first message from Los Angeles to New Jersey while still on its first orbit. It was a recorded message that went like this.
 
-> This is President Eisenhower speaking. This is one more significant step in the United States' program of space research and exploration being carried forward for peaceful purposes. The satellite balloon, which has reflected these words, may be used freely by any nation for similar experiments in its own interest.
+It was packed into a tiny spherical capsule that looked like this
 
-Echo presented an opportunity to make space more tangible to the average American since it could be seen clearly with the naked eye from anywhere in the world, brighter than the brightest stars (mag. 0). The newspapers published the times you could look up and see Echo flying overhead, but my impression is that nobody took notice. Echo's launch occurred during a busy media day in the Cold War, with the first published recovery of a capsule from space (Discoverer XIII) and the Moscow trial of the captured U2 pilot Gary Powers competing for public attention. Headlines the following day mentioned the capsule recovery, reading "Next Task for Discoverer Capsule: Bring a Space Monkey Back Alive," but I imagine that everybody was talking about how Discoverer could be used as a spy satellite and how that's the future and this whole U2 incident will never have to happen again.
+![Echo 1 inside its launch capsule](https://i.imgur.com/k1KdFQv.png)
 
-Echo was important for creating accurate atmospheric and gravity models in addition to its role as a passive communications satellite. Another reason I personally like the project is that the second message transmitted via Echo originated a couple blocks from where I grew up, at the Collins Radio Company in Cedar Rapids, IA.
+It inflated in space not with compressed air, but with sublimating powders. [This video](https://www.youtube.com/watch?v=qz3-b7sB9CA) shows what Echo II's inflation looked like. Below is a short gif from the video.
+
+![Echo II Satelloon Inflation, 1964](https://i.makeagif.com/media/6-23-2018/hrXdhv.gif)
+
+Hopefully you're thinking right now that the Echo satellites were pretty cool. You could see it from anywhere in the world, though apparently at least my own grandparents didn't look up. It looks like there was too much other stuff going on in the news that day: Discoverer XIII's capsule was recovered from space on the same day and also the captured U2 pilot Gary Powers was on trial in Moscow for espionage or something. In the newspaper archives for the following day, I didn't see much relating to Echo I, but I did see one funny headline reading "Next Task for Discoverer Capsule: Bring a Space Monkey Back Alive." What a wild time to be alive that must have been.
+
+Echo was scientifically important for creating accurate atmospheric and gravity models in addition to its role as a passive communications satellite. Another reason I personally like the project is that the second message transmitted via Echo originated a couple blocks from where I grew up, at the Collins Radio Company in Cedar Rapids, IA.
 
 ## Installing GMAT
 
@@ -45,7 +51,9 @@ I'm fairly confident you can do this yourself. Here's a troubleshooting tip if y
 
 ## Simulating Echo I's First Orbit
 
-We'll start by simulating the first orbit of the first Echo satellite. To do so we will need its initial orbital parameters and the satellite's physical characteristics.
+We'll start by simulating the first orbit of the first Echo satellite. This first part is pretty much the same as the first tutorial from the [GMAT docs](http://gmat.sourceforge.net/docs/R2018a/help.html). Bookmark that page because it's impossible to find.
+
+To do this we will need its initial orbital parameters and the satellite's physical characteristics.
 
 | | |
 | --- | --- |
@@ -105,6 +113,7 @@ Before configuring the atmosphere model in the propagator settings, download the
 * Click Setup
 * Under Model Selection, Historic/Near Term, Select CSSISpaceWeatherFile
 * Under Files, CSSISpaceWeatherFile, point to the sw19571001.txt file you downloaded
+* Under SchattenPredict, point to GMAT/R2018a/data/atmosphere/earth/SchattenPredict.txt
 * Click OK to confirm the atmosphere settings
 * Click OK to confirm the propagator settings
 
@@ -112,9 +121,9 @@ There are a couple of common questions about this part, one is why we chose the 
 
 The models need a space weather file, which we downloaded from [Celestrak](https://celestrak.com/SpaceData/).
 
-Then next question is about solar radiation pressure. Solar radiation pressure is like solar wind driving a solar sail, and since the Echo satellites are so big and so light, solar radiation pressure plays a large role in flight dynamics. There are other effects related to heating and cooling caused by the sun which we won't model: the Yarkovsky effect which requires knowledge of the rotation of the spacecraft (which we don't have), and Poynting–Robertson drag, which effects space _dust_ not space _craft_.
+Then next question is about solar radiation pressure. Solar radiation pressure is like solar wind driving a solar sail, and since the Echo satellites are so big and so light, solar radiation pressure definitely plays role in flight dynamics. You can see the difference too by toggling it on and off and observing the results. There are other effects related to heating and cooling caused by the sun which we won't model: the Yarkovsky effect which requires knowledge of the rotation of the spacecraft (which we don't have), and Poynting–Robertson drag, which effects space _dust_ not space _craft_.
 
-The choice of gravity model is not as important for Echo's flight dynamics, where atmospheric drag and spacecraft deflation uncertainties account for the highest loss of precision over time, but you need to know about gravity. For quick prototyping, it's best to use a lower-fidelity model so that mission run times are manageable, like JGM-2 with degree and order values of 10. For high accuracy, you can use EGM-96 with degree and order of 360. EGM-2008 is not available in GMAT yet, but that would allow degree 2190 and order 2159. Keep in mind that higher fidelity gravity models take longer to compute, and that gravitational effects are more pronounced for some mission profiles, like repeating ground track missions in low earth orbit, where the spacecraft is closest to Earth's bulges and tides which repeatedly pull the satellite this way and that, and also in geosynchronous orbit, where even the smallest non-uniformity will pull the satellite in one direction over the course of months.
+We use kind of a basic gravity model because cranking up the fidelity of gravity gives us diminishing returns. Atmospheric drag and spacecraft deflation uncertainties account for the highest loss of precision over time, but you need to know about gravity anyway. For quick prototyping, it's best to use a lower-fidelity model so that mission run times are manageable, like JGM-2 with degree and order values of 10. For high accuracy, you can use EGM-96 with degree and order of 360. EGM-2008 is not available in GMAT yet, but that would allow degree 2190 and order 2159. Keep in mind that higher fidelity gravity models take longer to compute, and that gravitational effects are more pronounced for some mission profiles, like repeating ground track missions in low earth orbit, where the spacecraft is closest to Earth's bulges and tides which repeatedly pull the satellite this way and that. Gravity is also important for geosynchronous operations.
 
 ### Configure outputs
 
@@ -256,21 +265,21 @@ Just like before, make sure you have `python -m SimpleHTTPServer 9966` running i
 
 ![Echo eccentricity plotted with plotly](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/output/Echo-eccentricity.png)
 
-Voila. Pretty ok.
+Pretty ok.
 
 ## Conclusions
 
 I found it was easiest to put together the basic components of a mission using the GUI first, and then edit the script manually from then on. I preferred using a report file and plotly for data visualization over the native visualization capabilities of GMAT.
 
-The GMAT simulation accurately captured the change in orbital parameters over time. Unmodeled changes in satellite shape and mass over time likely caused our simulated model to drift off the observed trajectory.
+The GMAT simulation accurately captured the change in orbital parameters over time. Unmodeled changes in satellite shape and mass over time likely caused our simulated model to drift off the observed trajectory a bit.
 
 ### Interesting Links
 
-* [Launch Video of Echo 1](https://youtu.be/NO2LkmBDle4?t=1m34s)
+* [Launch Video of Echo 1](https://youtu.be/NO2LkmBDle4?t=1m30s)
 * [The Odyssey of Project Echo](https://history.nasa.gov/SP-4308/ch6.htm)
 * [KSP and GMAT github projectT](https://github.com/bryan-lunt/KSP_GMAT)
-* [Quindar, some start-up's GMAT code](https://github.com/quindar)
 * [Julia GMAT bindings](https://github.com/JuliaAstrodynamics/GMAT.jl)
+* [GMAT docs](http://gmat.sourceforge.net/docs/R2018a/help.html)
 
 ### License
 

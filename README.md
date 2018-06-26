@@ -22,4 +22,4 @@ Source code is licensed under the [MIT license](https://github.com/pbrandt1/flig
 
 To cite these tutorials, you could do something like this:
 
-> "GMAT Simulation of Project Echo" originally written by Peter Brandt and originally published at [https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/GMAT_Simulation_of_Project_Echo.md](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/GMAT_Simulation_of_Project_Echo.md)
+> "Flight Dynamics Tutorials" originally written by Peter Brandt and originally published at [https://github.com/pbrandt1/flight-dynamics-tutorials](https://github.com/pbrandt1/flight-dynamics-tutorials)

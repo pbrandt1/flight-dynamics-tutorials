@@ -196,7 +196,7 @@ r: orbital radius (20,427 km for Mars stationary orbit)
 α = 70.59°
 ```
 
-In the below image, we assume a β angle of 0 and plot the coverate areas of the four Mars stationary orbit slots from earlier. The two stable points are the yellow circles, and the two unstable ones are cyan. This was plotted with Leaflet using tiles from [OpenPlanetaryMap](https://github.com/openplanetary/opm/wiki/OPM-Basemaps).
+In the below image, we assume a β angle of 0 and plot the coverage areas of the four Mars stationary orbit slots from earlier. The two stable points are the yellow circles, and the two unstable ones are cyan. This was plotted with Leaflet using tiles from [OpenPlanetaryMap](https://github.com/openplanetary/opm/wiki/OPM-Basemaps).
 
 ![Mars stationary satellite coverage with Leaflet](https://marspedia.org/images/9/94/AreostationaryCoverage.png)
 

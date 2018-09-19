@@ -227,7 +227,7 @@ For further analysis, we could to determine the amount of fuel required to place
 ### Interesting Links
 
 * [Stationkeeping in Mars orbit](http://www.planetary.org/blogs/emily-lakdawalla/2013/stationkeeping-in-mars-orbit.html) by Emily Lakdawalla
-* [Optimal longitudes determination for the station keeping of areostationary satellites](http://www.sciencedirect.com/science/article/pii/S0032063313000044) by Juan J. Silvaa and Pilar Romero
+* [Optimal longitudes determination for the station keeping of areostationary satellites](http://www.sciencedirect.com/science/article/pii/S0032063313000044) by Juan J. Silva and Pilar Romero
 
 
 ### License

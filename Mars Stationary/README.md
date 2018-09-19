@@ -35,9 +35,11 @@ Let's fire up GMAT and build a mission for a Mars stationary communications sate
 * Origin > Mars
 * Axes Type > BodyFixed
 
-Then make another coordinate system called MarsInertial that uses BodyInertial axes.
+If you think it'll be useful, you can make another coordinate system called MarsInertial that uses BodyInertial axes.
 
 ### Set the spacecraft state
+
+We'll place this spacecraft at 0 longitude. In GMAT body fixed coordinates, X points at the prime meridian, Y points east and Z points north.
 
 * Double-click on DefaultSC
 * Select Coordinate System > MarsFixed
@@ -54,10 +56,14 @@ Then make another coordinate system called MarsInertial that uses BodyInertial a
 * Select Central Body > Mars
 * Select Primary Body > Mars
 * Select Gravity Model > Mars-50C
-* Set Degree = 10
-* Set Order = 10
+* Set Degree = 50
+* Set Order = 50
+* Select Solar Radiation Pressure
+* Under Point Masses click Select
+* Add Sun
+* Click OK
 
-The moons of Mars, Phobos and Deimos, pass close to the stationary orbit altitudes, so we will need to add them to the calculation. GMAT doesn't include them by default, but we can create them.
+The moons of Mars, Phobos and Deimos have a small affect on satellites in Mars orbit, so may want to add them to the calculation. GMAT doesn't include them by default, but we can create them. You can skip this is you want since their effect is not very noticeable compared to the other perturbing forces acting on the spacecraft.
 
 In the resource tree, expand SolarSystem, right click on Mars, and choose Add > Moon.
 
@@ -92,80 +98,85 @@ Now you'll need ephemeris data for them. Go to https://naif.jpl.nasa.gov/pub/nai
 ### Configure outputs
 
 * Double-click on DefaultOrbitView
-* Unselect checkbox Enable Stars
+* Unselect checkbox Enable Constellations if you wish
 * Remove Earth from Selected Celestial Objects
 * Add Mars, Phobos, and Deimos to Selected Celestial Objects
-* Select Coordinate System > MarsInertial
+* Select Coordinate System > MarsFixed
 * Select View Point Reference > Mars
-* Edit View Point Vector 0 0 50000
+* Edit View Point Vector 30000 20000 20000
 * Edit View Direction > Mars
-* Edit View Up Definition > MarsInertial
+* Edit View Up Definition > MarsFixed
 
 ### Configure Mission Sequence
 
 * Double-click Propagate1 in the Mission tab
-* Edit Stopping Condition to be 887750 seconds (ten Mars days)
+* Set the stopping condition parameter to DefaultSC.ElapsedSeconds
+* Edit Stopping Condition to be 687, about one Mars year
 
 Run the mission. In the graphics window you should see the orbit of the satellite as well as the orbits of Phobos (inner orbit) and Deimos (outer orbit).
 
-![Stationary satellite around Mars, with Phobos and Deimos orbits included](http://i.imgur.com/lnsv9uc.gif)
+![First attempt at a stationary satellite around Mars, with Phobos and Deimos orbits included](mars-stationary-areostationary-at-0-longitude.png)
 
-Looks pretty good, but let's take a look at the actual data and see what's going on. Set up a report file and propagate for a while.
+The orbit does not look very stationary. You'll notice that the longitude kind of wobbles between -35.7 and 0, never appreciably exceeding the initial value, like we dropped it at the top of a hill and it rolled down the hill and halfway up a hill on the other side, and then rolled back to the starting point.
 
-```c
-%----------------------------------------
-%---------- Subscribers
-%----------------------------------------
+Like Earth, Mars is not perfectly spherical, and gravity is not uniform, so spacecraft tend to drift in this way. However, researchers have found two stable equilibrium points and two unstable equilibrium points in the equatorial stationary orbit belt around Mars. The two stable equilibrium points are 17.92W and 167.83E, and the two unstable ones are 105.55W and 75.34E, according to [Optimal longitudes determination for the station keeping of areostationary satellites](http://www.sciencedirect.com/science/article/pii/S0032063313000044) by Juan J. Silva and Pilar Romero. [Liu et al](https://arxiv.org/pdf/1203.1775.pdf) has them at about 16W, 165E, 106W, and 75E. I think it remains to be shown which points would require the least delta-v per year to maintain a position within a given bounding box, and this result might be different than the mathematically-derived equilibrium points found in these papers.
 
-Create ReportFile ReportFile1;
-GMAT ReportFile1.SolverIterations = Current;
-GMAT ReportFile1.UpperLeft = [ 0 0 ];
-GMAT ReportFile1.Size = [ 0 0 ];
-GMAT ReportFile1.RelativeZOrder = 0;
-GMAT ReportFile1.Maximized = false;
-GMAT ReportFile1.Filename = '/home/peter/code/flight-dynamics-tutorials/output/Mars-stationary-satellite.csv';
+Let's add spacecraft at these four points and see what they look like.
 
-GMAT ReportFile1.Precision = 16;
-GMAT ReportFile1.Add = {DefaultSC.UTCGregorian, DefaultSC.Mars.Latitude, DefaultSC.Mars.Longitude};
-GMAT ReportFile1.WriteHeaders = false;
-GMAT ReportFile1.LeftJustify = On;
-GMAT ReportFile1.ZeroFill = Off;
-GMAT ReportFile1.FixedWidth = false;
-GMAT ReportFile1.Delimiter = ',';
-GMAT ReportFile1.ColumnWidth = 23;
-GMAT ReportFile1.WriteReport = false;
+* Name StableEast
+* Select Coordinate System > MarsFixed
+* Edit X = -19968.616239503503
+* Edit Y =  4306.424592331447
+* Edit Z = 0
+* Edit VX = 0
+* Edit VY = 0
+* Edit VZ = 0
 
-%----------------------------------------
-%---------- Arrays, Variables, Strings
-%----------------------------------------
+* Name StableWest
+* Select Coordinate System > MarsFixed
+* Edit X = 19436.69217895562
+* Edit Y = -6285.373849702618
+* Edit Z = 0
+* Edit VX = 0
+* Edit VY = 0
+* Edit VZ = 0
 
-Create Variable MARS_DAY T SEGMENT_END;
-Create String CSV_HEADER;
-GMAT CSV_HEADER = 'DefaultSC.UTCGregorian,DefaultSC.Mars.Latitude,DefaultSC.Mars.Longitude';
+* Name UnstableEast
+* Select Coordinate System > MarsFixed
+* Edit X = 5166.446164225696
+* Edit Y = 19763.571573026915
+* Edit Z = 0
+* Edit VX = 0
+* Edit VY = 0
+* Edit VZ = 0
 
-%----------------------------------------
-%---------- Mission Sequence
-%----------------------------------------
+* Name UnstableWest
+* Select Coordinate System > MarsFixed
+* Edit X = -5476.241482496195
+* Edit Y = -19679.982380972495
+* Edit Z = 0
+* Edit VX = 0
+* Edit VY = 0
+* Edit VZ = 0
 
-BeginMissionSequence;
-MARS_DAY = 88775.222 % seconds in a Mars solar day
-T = 0
+Go to Mission -> Propoagate1 and click the little dots under Spacecraft List to add your new spacecraft to the propagator.
 
-% initialize report
-Report ReportFile1 CSV_HEADER
-Report ReportFile1 DefaultSC.UTCGregorian DefaultSC.Mars.Latitude DefaultSC.Mars.Longitude
+Then go to DefaultOrbitView and add these to your visualization, and enjoy this extremely fun vizualization. Those unstable ones are really unstable.
 
-SEGMENT_END = MARS_DAY * 200 % propagate for 200 days
-While T < SEGMENT_END
-  Propagate DefaultProp(DefaultSC) {DefaultSC.ElapsedSecs = MARS_DAY};
-  T = T + MARS_DAY
-  Report ReportFile1 DefaultSC.UTCGregorian DefaultSC.Mars.Latitude DefaultSC.Mars.Longitude
-EndWhile
-```
+according to silva:
+75.35, 167.83, 254.45, 342.08
 
-You'll notice that the longitude kind of wobbles between -35.7 and 0, never appreciably exceeding the initial value, like we dropped it at the top of a hill and it rolled down the hill and halfway up a hill on the other side, and then rolled back to the starting point.
+and according to liu, they are
+75, 165, 254, 344
 
-Like Earth, Mars is not perfectly spherical, so there are gravitational hills and valleys. If you place a stationary orbit at the bottom of a valley or balance it on top of a hill, it's easier to keep the satellite in that same spot. The two stable equilibrium points are 17.92W and 167.83E, and the two unstable ones are 105.55W and 75.34E, according to [Optimal longitudes determination for the station keeping of areostationary satellites](http://www.sciencedirect.com/science/article/pii/S0032063313000044) by Juan J. Silvaa and Pilar Romero. Let's change the simulation to put the satellite at the stable equilibrium point at -17.92 longitude.
+but according to my gmat sim, the stationary points are 
+68.5, 171, 249.5, 345.5
+
+71, 169.6, 251.1, 344.1
+
+
+the mathy part for this is not too hard. `x = R * cos(angle), y = R * sin(angle)`
+
 
 ```
 GMAT DefaultSC.X = 19436.6;
@@ -173,6 +184,51 @@ GMAT DefaultSC.Y = -6285.4;
 ```
 
 Sure enough, the orbit is much more stable at this longitude, oscillating only between 17.0 and 19.3.
+
+what perturbs this thing though?
+
+Just gravity 10x10 model:
+min lng is -19.26234327308323
+max lng is -17.00779037160072
+min lat is -0.001620357052609792
+max lat is 0.001597669154460668
+
+Adding solar radiation pressure
+min lng is -19.27060677341495
+max lng is -16.99899723434899
+min lat is -0.001621645528157962
+max lat is 0.00160304088716458
+
+removing srp and adding in sun gravity
+min lng is -19.28590517274607
+max lng is -16.98511816379658
+min lat is -0.1470006676038395
+max lat is 0.1467350527294402
+
+removing sun and adding jupiter gravity
+min lng is -19.26234276255456
+max lng is -17.00779088031061
+min lat is -0.00161617070773592
+max lat is 0.001593831883171796
+
+removing jupiter and adding phobos
+min lng is -19.95529754602756
+max lng is -16.31114330288946
+min lat is -0.00249127786194213
+max lat is 0.002470035582794609
+
+removing phobos and adding deimos
+min lng is -19.95430780118081
+max lng is -16.31213123036566
+min lat is -0.002562792041421104
+max lat is 0.00254320841051411
+
+removing deimos and updating gravity model to be 50x50
+min lng is -19.95460110690626
+max lng is -16.31184225808087
+min lat is -0.002486793441415184
+max lat is 0.002464747685257366
+
 
 ## Satellite Coverage
 

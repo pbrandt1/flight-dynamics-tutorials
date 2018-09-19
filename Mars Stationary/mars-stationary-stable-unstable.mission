@@ -1,0 +1,334 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2018-09-17 00:43:34
+
+
+%----------------------------------------
+%---------- Solar System User-Modified Values
+%----------------------------------------
+
+GMAT SolarSystem.EphemerisSource = 'SPICE';
+GMAT SolarSystem.SPKFilename = '/z/flight-dynamics/gmat/mar097.bsp';
+
+%----------------------------------------
+%---------- User-Defined Celestial Bodies
+%----------------------------------------
+
+Create Moon Phobos;
+GMAT Phobos.NAIFId = 401;
+GMAT Phobos.OrbitColor = Tan;
+GMAT Phobos.TargetColor = DarkGray;
+GMAT Phobos.EquatorialRadius = 13.5;
+GMAT Phobos.Flattening = 0.3185185185185186;
+GMAT Phobos.Mu = 0.0007093399;
+GMAT Phobos.PosVelSource = 'SPICE';
+GMAT Phobos.CentralBody = 'Mars';
+GMAT Phobos.RotationDataSource = 'IAUSimplified';
+GMAT Phobos.OrientationEpoch = 21545;
+GMAT Phobos.SpinAxisRAConstant = 0;
+GMAT Phobos.SpinAxisRARate = -0.641;
+GMAT Phobos.SpinAxisDECConstant = 90;
+GMAT Phobos.SpinAxisDECRate = -0.5570000000000001;
+GMAT Phobos.RotationConstant = 190.147;
+GMAT Phobos.RotationRate = 360.9856235;
+GMAT Phobos.TextureMapFileName = 'GenericCelestialBody.jpg';
+GMAT Phobos.3DModelFile = '';
+GMAT Phobos.3DModelOffsetX = 0;
+GMAT Phobos.3DModelOffsetY = 0;
+GMAT Phobos.3DModelOffsetZ = 0;
+GMAT Phobos.3DModelRotationX = 0;
+GMAT Phobos.3DModelRotationY = 0;
+GMAT Phobos.3DModelRotationZ = 0;
+GMAT Phobos.3DModelScale = 10;
+
+Create Moon Deimos;
+GMAT Deimos.NAIFId = 402;
+GMAT Deimos.OrbitColor = Tan;
+GMAT Deimos.TargetColor = DarkGray;
+GMAT Deimos.EquatorialRadius = 7.5;
+GMAT Deimos.Flattening = 0.3066666666666666;
+GMAT Deimos.Mu = 0.0001588174;
+GMAT Deimos.PosVelSource = 'SPICE';
+GMAT Deimos.CentralBody = 'Mars';
+GMAT Deimos.RotationDataSource = 'IAUSimplified';
+GMAT Deimos.OrientationEpoch = 21545;
+GMAT Deimos.SpinAxisRAConstant = 0;
+GMAT Deimos.SpinAxisRARate = -0.641;
+GMAT Deimos.SpinAxisDECConstant = 90;
+GMAT Deimos.SpinAxisDECRate = -0.5570000000000001;
+GMAT Deimos.RotationConstant = 190.147;
+GMAT Deimos.RotationRate = 360.9856235;
+GMAT Deimos.TextureMapFileName = 'GenericCelestialBody.jpg';
+GMAT Deimos.3DModelFile = '';
+GMAT Deimos.3DModelOffsetX = 0;
+GMAT Deimos.3DModelOffsetY = 0;
+GMAT Deimos.3DModelOffsetZ = 0;
+GMAT Deimos.3DModelRotationX = 0;
+GMAT Deimos.3DModelRotationY = 0;
+GMAT Deimos.3DModelRotationZ = 0;
+GMAT Deimos.3DModelScale = 10;
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft StableEast;
+GMAT StableEast.DateFormat = UTCGregorian;
+GMAT StableEast.Epoch = '01 Jan 2000 11:59:28.000';
+GMAT StableEast.CoordinateSystem = MarsFixed;
+GMAT StableEast.DisplayStateType = Cartesian;
+GMAT StableEast.X = -19968.61623950402;
+GMAT StableEast.Y = 4306.424592329508;
+GMAT StableEast.Z = -3.524291969370097e-09;
+GMAT StableEast.VX = -1.36501920877663e-13;
+GMAT StableEast.VY = 3.774758283725532e-14;
+GMAT StableEast.VZ = 6.661338147750939e-16;
+GMAT StableEast.DryMass = 850;
+GMAT StableEast.Cd = 2.2;
+GMAT StableEast.Cr = 1.8;
+GMAT StableEast.DragArea = 15;
+GMAT StableEast.SRPArea = 1;
+GMAT StableEast.NAIFId = -10004001;
+GMAT StableEast.NAIFIdReferenceFrame = -9004001;
+GMAT StableEast.OrbitColor = Red;
+GMAT StableEast.TargetColor = Teal;
+GMAT StableEast.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT StableEast.CdSigma = 1e+70;
+GMAT StableEast.CrSigma = 1e+70;
+GMAT StableEast.Id = 'SatId';
+GMAT StableEast.Attitude = CoordinateSystemFixed;
+GMAT StableEast.SPADSRPScaleFactor = 1;
+GMAT StableEast.ModelFile = 'aura.3ds';
+GMAT StableEast.ModelOffsetX = 0;
+GMAT StableEast.ModelOffsetY = 0;
+GMAT StableEast.ModelOffsetZ = 0;
+GMAT StableEast.ModelRotationX = 0;
+GMAT StableEast.ModelRotationY = 0;
+GMAT StableEast.ModelRotationZ = 0;
+GMAT StableEast.ModelScale = 1;
+GMAT StableEast.AttitudeDisplayStateType = 'Quaternion';
+GMAT StableEast.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT StableEast.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT StableEast.EulerAngleSequence = '321';
+
+Create Spacecraft StableWest;
+GMAT StableWest.DateFormat = TAIModJulian;
+GMAT StableWest.Epoch = '21545';
+GMAT StableWest.CoordinateSystem = MarsFixed;
+GMAT StableWest.DisplayStateType = Cartesian;
+GMAT StableWest.X = 19436.69217894521;
+GMAT StableWest.Y = -6285.373849701231;
+GMAT StableWest.Z = 4.246885509928688e-09;
+GMAT StableWest.VX = 9.781064846947629e-14;
+GMAT StableWest.VY = 7.365219545363288e-13;
+GMAT StableWest.VZ = -1.665334536937735e-15;
+GMAT StableWest.DryMass = 850;
+GMAT StableWest.Cd = 2.2;
+GMAT StableWest.Cr = 1.8;
+GMAT StableWest.DragArea = 15;
+GMAT StableWest.SRPArea = 1;
+GMAT StableWest.NAIFId = -10002001;
+GMAT StableWest.NAIFIdReferenceFrame = -9002001;
+GMAT StableWest.OrbitColor = Green;
+GMAT StableWest.TargetColor = LightGray;
+GMAT StableWest.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT StableWest.CdSigma = 1e+70;
+GMAT StableWest.CrSigma = 1e+70;
+GMAT StableWest.Id = 'SatId';
+GMAT StableWest.Attitude = CoordinateSystemFixed;
+GMAT StableWest.SPADSRPScaleFactor = 1;
+GMAT StableWest.ModelFile = 'aura.3ds';
+GMAT StableWest.ModelOffsetX = 0;
+GMAT StableWest.ModelOffsetY = 0;
+GMAT StableWest.ModelOffsetZ = 0;
+GMAT StableWest.ModelRotationX = 0;
+GMAT StableWest.ModelRotationY = 0;
+GMAT StableWest.ModelRotationZ = 0;
+GMAT StableWest.ModelScale = 1;
+GMAT StableWest.AttitudeDisplayStateType = 'Quaternion';
+GMAT StableWest.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT StableWest.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT StableWest.EulerAngleSequence = '321';
+
+Create Spacecraft UnstableEast;
+GMAT UnstableEast.DateFormat = TAIModJulian;
+GMAT UnstableEast.Epoch = '21545';
+GMAT UnstableEast.CoordinateSystem = MarsFixed;
+GMAT UnstableEast.DisplayStateType = Cartesian;
+GMAT UnstableEast.X = 5166.446164226338;
+GMAT UnstableEast.Y = 19763.57157302982;
+GMAT UnstableEast.Z = 2.213710104115307e-09;
+GMAT UnstableEast.VX = 2.033928581113287e-13;
+GMAT UnstableEast.VY = -4.507505479978136e-14;
+GMAT UnstableEast.VZ = 1.110223024625157e-16;
+GMAT UnstableEast.DryMass = 850;
+GMAT UnstableEast.Cd = 2.2;
+GMAT UnstableEast.Cr = 1.8;
+GMAT UnstableEast.DragArea = 15;
+GMAT UnstableEast.SRPArea = 1;
+GMAT UnstableEast.NAIFId = -10003001;
+GMAT UnstableEast.NAIFIdReferenceFrame = -9003001;
+GMAT UnstableEast.OrbitColor = Yellow;
+GMAT UnstableEast.TargetColor = DarkGray;
+GMAT UnstableEast.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT UnstableEast.CdSigma = 1e+70;
+GMAT UnstableEast.CrSigma = 1e+70;
+GMAT UnstableEast.Id = 'SatId';
+GMAT UnstableEast.Attitude = CoordinateSystemFixed;
+GMAT UnstableEast.SPADSRPScaleFactor = 1;
+GMAT UnstableEast.ModelFile = 'aura.3ds';
+GMAT UnstableEast.ModelOffsetX = 0;
+GMAT UnstableEast.ModelOffsetY = 0;
+GMAT UnstableEast.ModelOffsetZ = 0;
+GMAT UnstableEast.ModelRotationX = 0;
+GMAT UnstableEast.ModelRotationY = 0;
+GMAT UnstableEast.ModelRotationZ = 0;
+GMAT UnstableEast.ModelScale = 1;
+GMAT UnstableEast.AttitudeDisplayStateType = 'Quaternion';
+GMAT UnstableEast.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT UnstableEast.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT UnstableEast.EulerAngleSequence = '321';
+
+Create Spacecraft UnstableWest;
+GMAT UnstableWest.DateFormat = TAIModJulian;
+GMAT UnstableWest.Epoch = '21545';
+GMAT UnstableWest.CoordinateSystem = MarsFixed;
+GMAT UnstableWest.DisplayStateType = Cartesian;
+GMAT UnstableWest.X = -5476.241482497181;
+GMAT UnstableWest.Y = -19679.98238096926;
+GMAT UnstableWest.Z = -1.218722900375724e-10;
+GMAT UnstableWest.VX = 2.311484337269576e-13;
+GMAT UnstableWest.VY = 6.894484982922222e-14;
+GMAT UnstableWest.VZ = 3.33066907387547e-16;
+GMAT UnstableWest.DryMass = 850;
+GMAT UnstableWest.Cd = 2.2;
+GMAT UnstableWest.Cr = 1.8;
+GMAT UnstableWest.DragArea = 15;
+GMAT UnstableWest.SRPArea = 1;
+GMAT UnstableWest.NAIFId = -10004001;
+GMAT UnstableWest.NAIFIdReferenceFrame = -9004001;
+GMAT UnstableWest.OrbitColor = Blue;
+GMAT UnstableWest.TargetColor = DimGray;
+GMAT UnstableWest.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT UnstableWest.CdSigma = 1e+70;
+GMAT UnstableWest.CrSigma = 1e+70;
+GMAT UnstableWest.Id = 'SatId';
+GMAT UnstableWest.Attitude = CoordinateSystemFixed;
+GMAT UnstableWest.SPADSRPScaleFactor = 1;
+GMAT UnstableWest.ModelFile = 'aura.3ds';
+GMAT UnstableWest.ModelOffsetX = 0;
+GMAT UnstableWest.ModelOffsetY = 0;
+GMAT UnstableWest.ModelOffsetZ = 0;
+GMAT UnstableWest.ModelRotationX = 0;
+GMAT UnstableWest.ModelRotationY = 0;
+GMAT UnstableWest.ModelRotationZ = 0;
+GMAT UnstableWest.ModelScale = 1;
+GMAT UnstableWest.AttitudeDisplayStateType = 'Quaternion';
+GMAT UnstableWest.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT UnstableWest.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT UnstableWest.EulerAngleSequence = '321';
+
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel DefaultProp_ForceModel;
+GMAT DefaultProp_ForceModel.CentralBody = Mars;
+GMAT DefaultProp_ForceModel.PrimaryBodies = {Mars};
+GMAT DefaultProp_ForceModel.PointMasses = {Deimos, Phobos, Sun};
+GMAT DefaultProp_ForceModel.Drag = None;
+GMAT DefaultProp_ForceModel.SRP = On;
+GMAT DefaultProp_ForceModel.RelativisticCorrection = Off;
+GMAT DefaultProp_ForceModel.ErrorControl = RSSStep;
+GMAT DefaultProp_ForceModel.GravityField.Mars.Degree = 50;
+GMAT DefaultProp_ForceModel.GravityField.Mars.Order = 50;
+GMAT DefaultProp_ForceModel.GravityField.Mars.StmLimit = 100;
+GMAT DefaultProp_ForceModel.GravityField.Mars.PotentialFile = 'Mars50c.cof';
+GMAT DefaultProp_ForceModel.GravityField.Mars.TideModel = 'None';
+GMAT DefaultProp_ForceModel.SRP.Flux = 1367;
+GMAT DefaultProp_ForceModel.SRP.SRPModel = Spherical;
+GMAT DefaultProp_ForceModel.SRP.Nominal_Sun = 149597870.691;
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator DefaultProp;
+GMAT DefaultProp.FM = DefaultProp_ForceModel;
+GMAT DefaultProp.Type = RungeKutta89;
+GMAT DefaultProp.InitialStepSize = 60;
+GMAT DefaultProp.Accuracy = 9.999999999999999e-12;
+GMAT DefaultProp.MinStep = 0.001;
+GMAT DefaultProp.MaxStep = 2700;
+GMAT DefaultProp.MaxStepAttempts = 50;
+GMAT DefaultProp.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Coordinate Systems
+%----------------------------------------
+
+Create CoordinateSystem MarsFixed;
+GMAT MarsFixed.Origin = Mars;
+GMAT MarsFixed.Axes = BodyFixed;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView DefaultOrbitView;
+GMAT DefaultOrbitView.SolverIterations = Current;
+GMAT DefaultOrbitView.UpperLeft = [ 0.1446428571428572 0.03755868544600939 ];
+GMAT DefaultOrbitView.Size = [ 0.9964285714285714 0.9589201877934272 ];
+GMAT DefaultOrbitView.RelativeZOrder = 84;
+GMAT DefaultOrbitView.Maximized = true;
+GMAT DefaultOrbitView.Add = {StableEast, StableWest, UnstableEast, UnstableWest, Mars, Deimos, Phobos};
+GMAT DefaultOrbitView.CoordinateSystem = MarsFixed;
+GMAT DefaultOrbitView.DrawObject = [ true true true true true true true ];
+GMAT DefaultOrbitView.DataCollectFrequency = 1;
+GMAT DefaultOrbitView.UpdatePlotFrequency = 50;
+GMAT DefaultOrbitView.NumPointsToRedraw = 0;
+GMAT DefaultOrbitView.ShowPlot = true;
+GMAT DefaultOrbitView.MaxPlotPoints = 20000;
+GMAT DefaultOrbitView.ShowLabels = true;
+GMAT DefaultOrbitView.ViewPointReference = Mars;
+GMAT DefaultOrbitView.ViewPointVector = [ 30000 20000 20000 ];
+GMAT DefaultOrbitView.ViewDirection = Mars;
+GMAT DefaultOrbitView.ViewScaleFactor = 1;
+GMAT DefaultOrbitView.ViewUpCoordinateSystem = EarthMJ2000Eq;
+GMAT DefaultOrbitView.ViewUpAxis = Z;
+GMAT DefaultOrbitView.EclipticPlane = Off;
+GMAT DefaultOrbitView.XYPlane = On;
+GMAT DefaultOrbitView.WireFrame = Off;
+GMAT DefaultOrbitView.Axes = On;
+GMAT DefaultOrbitView.Grid = Off;
+GMAT DefaultOrbitView.SunLine = Off;
+GMAT DefaultOrbitView.UseInitialView = On;
+GMAT DefaultOrbitView.StarCount = 7000;
+GMAT DefaultOrbitView.EnableStars = On;
+GMAT DefaultOrbitView.EnableConstellations = Off;
+
+Create ReportFile ReportFile1;
+GMAT ReportFile1.SolverIterations = Current;
+GMAT ReportFile1.UpperLeft = [ 0 0 ];
+GMAT ReportFile1.Size = [ 0 0 ];
+GMAT ReportFile1.RelativeZOrder = 0;
+GMAT ReportFile1.Maximized = false;
+GMAT ReportFile1.Filename = '/z/flight-dynamics/gmat/missions/mars-stationary-report.txt';
+GMAT ReportFile1.Precision = 16;
+GMAT ReportFile1.Add = {StableEast.ElapsedSecs, StableEast.MarsFixed.X, StableEast.MarsFixed.Y};
+GMAT ReportFile1.WriteHeaders = true;
+GMAT ReportFile1.LeftJustify = On;
+GMAT ReportFile1.ZeroFill = Off;
+GMAT ReportFile1.FixedWidth = false;
+GMAT ReportFile1.Delimiter = ',';
+GMAT ReportFile1.ColumnWidth = 23;
+GMAT ReportFile1.WriteReport = true;
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Propagate DefaultProp(StableEast, StableWest, UnstableEast, UnstableWest) {StableEast.ElapsedDays = 687};

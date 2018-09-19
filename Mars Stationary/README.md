@@ -16,8 +16,9 @@ A geostationary satellite is located at the equator and orbits around Earth exac
 
 ```
 gravity = centripetal acceleration
-   μ/r² = ω²r
-      r = ∛(μ/ω²)
+μ/r²    = ω²r
+
+r       = ∛(μ/ω²)
 
 ω = 2π radians / 88642.66 seconds in a Mars sidereal day (a solar day is slightly more than 2π radians and slightly more time)
 μ = 4.282837e4 km3 s−2
@@ -113,9 +114,9 @@ Now you'll need ephemeris data for them. Go to https://naif.jpl.nasa.gov/pub/nai
 * Set the stopping condition parameter to DefaultSC.ElapsedSeconds
 * Edit Stopping Condition to be 687, about one Mars year
 
-Run the mission. In the graphics window you should see the orbit of the satellite as well as the orbits of Phobos (inner orbit) and Deimos (outer orbit).
+Run the mission. In the graphics window you should see the orbit of the satellite as well as the orbits of Phobos (the inner moon) and Deimos (outer moon).
 
-![First attempt at a stationary satellite around Mars, with Phobos and Deimos orbits included](mars-stationary-areostationary-at-0-longitude.png)
+![First attempt at a stationary satellite around Mars, with Phobos and Deimos orbits included](https://github.com/pbrandt1/flight-dynamics-tutorials/raw/master/Mars%20Stationary/areostationary-at-0-longitude.png)
 
 The orbit does not look very stationary. You'll notice that the longitude kind of wobbles between -35.7 and 0, never appreciably exceeding the initial value, like we dropped it at the top of a hill and it rolled down the hill and halfway up a hill on the other side, and then rolled back to the starting point.
 
@@ -161,31 +162,13 @@ Let's add spacecraft at these four points and see what they look like.
 
 Go to Mission -> Propoagate1 and click the little dots under Spacecraft List to add your new spacecraft to the propagator.
 
-Then go to DefaultOrbitView and add these to your visualization, and enjoy this extremely fun vizualization. Those unstable ones are really unstable.
+Then go to DefaultOrbitView and add these to your visualization, and enjoy this extremely fun vizualization.
 
-according to silva:
-75.35, 167.83, 254.45, 342.08
+![Mars stationary orbits at the stable and unstable longitudes](https://github.com/pbrandt1/flight-dynamics-tutorials/raw/master/Mars%20Stationary/areostationary-stable-unstable.png)
 
-and according to liu, they are
-75, 165, 254, 344
+Those unstable ones are really unstable, but even the "stable" ones oscillate east and west by a few degrees and wobble north to south a small amount. What causes these perturbations? We could either use a bunch of math, or we could edit the propagator in our GMAT mission and see what has the biggest effect on the satellite. I'm not saying this is super scientific, just that it's a way to see for yourself if you're a see-it-to-belive-it kind of person.
 
-but according to my gmat sim, the stationary points are 
-68.5, 171, 249.5, 345.5
-
-71, 169.6, 251.1, 344.1
-
-
-the mathy part for this is not too hard. `x = R * cos(angle), y = R * sin(angle)`
-
-
-```
-GMAT DefaultSC.X = 19436.6;
-GMAT DefaultSC.Y = -6285.4;
-```
-
-Sure enough, the orbit is much more stable at this longitude, oscillating only between 17.0 and 19.3.
-
-what perturbs this thing though?
+What I did was keep the stable west satellite (deleting the others), set up a report file, started off with a super basic propagator with no other perturbing forces except for a 10x10 gravity model, and then I tried adding each perturbing force individually.
 
 Just gravity 10x10 model:
 min lng is -19.26234327308323
@@ -229,12 +212,13 @@ max lng is -16.31184225808087
 min lat is -0.002486793441415184
 max lat is 0.002464747685257366
 
+It looks like Phobos and Deimos had about an equal effect. So did upping the gravity model's fidelity from 10x10 to 50x50. All in all though, those first 10 gravity terms dominate the spacecraft dynamics. Mars is extremely lumpy, it's amazing that the current Mars orbiters can get any sort of precise imagery or data at all.
 
 ## Satellite Coverage
 
 ![Satellite Coverage Diagram](http://i.imgur.com/fKtQOcC.png)
 
-Satellite coverage can be approximated as a circular region on the surface of Mars. Pick a point on Mars, and then draw a circle that goes `α` degrees east, west, north and south. We can calculate the angle α of the circle if we know the satellite's altitude, the planet's radius, and if we have specified a mask value (like the satellite needs to be at least 10° above the horizon in order to work).
+Satellite coverage can be approximated as a circular region on the surface of Mars. Pick a point on Mars, and then draw a circle that goes `α` degrees east, west, north and south. We can calculate the angle α of the circle if we know the satellite's altitude, the planet's radius, and if we have specified a mask value. In the example calculation below we specify that the satellite needs to be at least 10° above the horizon in order to achieve contact.
 
 ```
 R: planet's radius (3,390 km for Mars)
@@ -244,17 +228,9 @@ r: orbital radius (20,427 km for Mars stationary orbit)
 α = 70.59°
 ```
 
-Satellite coverage is not super interesting for a Mars mission unless you know what you want to be covering. We'll plot the locations of some upcoming missions to Mars with Leaflet and then you can drag the satellites coverage zone around on the map to see what you can hit. If you find a spot you think is perfect, IDK, post it to reddit or something :).
+In the below image, we assume a β angle of 0 and plot the coverate areas of the four Mars stationary orbit slots from earlier. The two stable points are the yellow circles, and the two unstable ones are cyan. This was plotted with Leaflet using tiles from [OpenPlanetaryMap](https://github.com/openplanetary/opm/wiki/OPM-Basemaps).
 
-For this, we're using tiles from Mapbox. If you want to read a little more about different maps of Mars, you can read my [blog post about them](https://peterbrandt.space/blog/2016-01-01-Modern-Maps-of-Mars) (currently under construction). For this tutorial, you can run your own map by running the command below in the root of this repository.
-
-```
-python -m SimpleHTTPServer 9966
-```
-
-Then go to http://localhost:9966/Mars.html. You should see something like this:
-
-![Mars stationary satellite coverage with Leaflet](http://i.imgur.com/BcaGehN.png)
+![Mars stationary satellite coverage with Leaflet](https://marspedia.org/images/9/94/AreostationaryCoverage.png)
 
 ## Eclipses
 

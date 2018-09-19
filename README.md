@@ -1,17 +1,17 @@
 # Flight Dynamics Tutorials
 
-## [GMAT Simulation of Project Echo](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/GMAT_Simulation_of_Project_Echo.md)
+## [GMAT Simulation of Project Echo](https://github.com/pbrandt1/flight-dynamics-tutorials/tree/master/Project%20Echo)
 
 - GMAT basics
 - GMAT atmosphere, gravity
 - External plotting and charting
 - GMAT command line
 
-## [Mars Stationary Satellite](https://github.com/pbrandt1/flight-dynamics-tutorials/blob/master/Mars_Stationary_Satellite.md)
+## [Mars Stationary Satellite](https://github.com/pbrandt1/flight-dynamics-tutorials/tree/master/Mars%20Stationary)
 
 - Mars gravity model
 - Stable/unstable equilibrium orbits
-- Plotting satellite coverage
+- Satellite coverage
 - Eclipses
 <!-- - Deep space network communication
 - Station keeping maneuvers -->

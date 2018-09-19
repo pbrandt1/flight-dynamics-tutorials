@@ -162,7 +162,7 @@ Let's add spacecraft at these four points and see what they look like.
 
 Go to Mission -> Propoagate1 and click the little dots under Spacecraft List to add your new spacecraft to the propagator.
 
-Then go to DefaultOrbitView and add these to your visualization, and enjoy this extremely fun vizualization.
+Then go to DefaultOrbitView and add these to your visualization, then enjoy the view. The slow but unrelenting motion of the satellites in the unstable points feels like something out of a screensaver.
 
 ![Mars stationary orbits at the stable and unstable longitudes](https://github.com/pbrandt1/flight-dynamics-tutorials/raw/master/Mars%20Stationary/areostationary-stable-unstable.png)
 

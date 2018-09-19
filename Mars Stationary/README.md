@@ -118,13 +118,13 @@ Run the mission. In the graphics window you should see the orbit of the satellit
 
 ![First attempt at a stationary satellite around Mars, with Phobos and Deimos orbits included](https://github.com/pbrandt1/flight-dynamics-tutorials/raw/master/Mars%20Stationary/areostationary-at-0-longitude.png)
 
-The orbit does not look very stationary. You'll notice that the longitude kind of wobbles between -35.7 and 0, never appreciably exceeding the initial value, like we dropped it at the top of a hill and it rolled down the hill and halfway up a hill on the other side, and then rolled back to the starting point.
+The orbit does not look very stationary. You'll notice that the longitude swings back and forth between -35.7 and 0, never appreciably exceeding the initial value, like a pendulum or like if we dropped it at the top of a frictionless hill and it rolled down the hill and halfway up a hill on the other side, and then rolled back to the starting point.
 
 Like Earth, Mars is not perfectly spherical, and gravity is not uniform, so spacecraft tend to drift in this way. However, researchers have found two stable equilibrium points and two unstable equilibrium points in the equatorial stationary orbit belt around Mars. The two stable equilibrium points are 17.92W and 167.83E, and the two unstable ones are 105.55W and 75.34E, according to [Optimal longitudes determination for the station keeping of areostationary satellites](http://www.sciencedirect.com/science/article/pii/S0032063313000044) by Juan J. Silva and Pilar Romero. [Liu et al](https://arxiv.org/pdf/1203.1775.pdf) has them at about 16W, 165E, 106W, and 75E. I think it remains to be shown which points would require the least delta-v per year to maintain a position within a given bounding box, and this result might be different than the mathematically-derived equilibrium points found in these papers.
 
 Let's add spacecraft at these four points and see what they look like.
 
-* Name StableEast
+**StableEast**
 * Select Coordinate System > MarsFixed
 * Edit X = -19968.616239503503
 * Edit Y =  4306.424592331447
@@ -133,7 +133,7 @@ Let's add spacecraft at these four points and see what they look like.
 * Edit VY = 0
 * Edit VZ = 0
 
-* Name StableWest
+**StableWest**
 * Select Coordinate System > MarsFixed
 * Edit X = 19436.69217895562
 * Edit Y = -6285.373849702618
@@ -142,7 +142,7 @@ Let's add spacecraft at these four points and see what they look like.
 * Edit VY = 0
 * Edit VZ = 0
 
-* Name UnstableEast
+**UnstableEast**
 * Select Coordinate System > MarsFixed
 * Edit X = 5166.446164225696
 * Edit Y = 19763.571573026915
@@ -151,7 +151,7 @@ Let's add spacecraft at these four points and see what they look like.
 * Edit VY = 0
 * Edit VZ = 0
 
-* Name UnstableWest
+**UnstableWest**
 * Select Coordinate System > MarsFixed
 * Edit X = -5476.241482496195
 * Edit Y = -19679.982380972495
@@ -170,49 +170,17 @@ Those unstable ones are really unstable, but even the "stable" ones oscillate ea
 
 What I did was keep the stable west satellite (deleting the others), set up a report file, started off with a super basic propagator with no other perturbing forces except for a 10x10 gravity model, and then I tried adding each perturbing force individually.
 
-Just gravity 10x10 model:
-min lng is -19.26234327308323
-max lng is -17.00779037160072
-min lat is -0.001620357052609792
-max lat is 0.001597669154460668
+| | min longitude | max longitude | min latitude | max latitude |
+| --- | --- | --- | --- | --- |
+| Just gravity 10x10 model | -19.26234327308323 | -17.00779037160072 | -0.001620357052609792 | 0.001597669154460668 |
+| Adding solar radiation pressure | -19.27060677341495| -16.99899723434899 | -0.001621645528157962 | 0.00160304088716458 |
+| removing srp and adding in sun gravity | -19.28590517274607 | -16.98511816379658  | -0.1470006676038395 | 0.1467350527294402 |
+| removing sun and adding jupiter gravity | -19.26234276255456 | -17.00779088031061 | -0.00161617070773592 | 0.001593831883171796 |
+| removing jupiter and adding phobos | -19.95529754602756 | -16.31114330288946 | -0.00249127786194213 | 0.002470035582794609 |
+| removing phobos and adding deimos | -19.95430780118081 | -16.31213123036566 | -0.002562792041421104 | 0.00254320841051411 |
+| removing deimos and updating gravity model to be 50x50 | -19.95460110690626  | -16.31184225808087 | -0.002486793441415184 | 0.002464747685257366 |
 
-Adding solar radiation pressure
-min lng is -19.27060677341495
-max lng is -16.99899723434899
-min lat is -0.001621645528157962
-max lat is 0.00160304088716458
-
-removing srp and adding in sun gravity
-min lng is -19.28590517274607
-max lng is -16.98511816379658
-min lat is -0.1470006676038395
-max lat is 0.1467350527294402
-
-removing sun and adding jupiter gravity
-min lng is -19.26234276255456
-max lng is -17.00779088031061
-min lat is -0.00161617070773592
-max lat is 0.001593831883171796
-
-removing jupiter and adding phobos
-min lng is -19.95529754602756
-max lng is -16.31114330288946
-min lat is -0.00249127786194213
-max lat is 0.002470035582794609
-
-removing phobos and adding deimos
-min lng is -19.95430780118081
-max lng is -16.31213123036566
-min lat is -0.002562792041421104
-max lat is 0.00254320841051411
-
-removing deimos and updating gravity model to be 50x50
-min lng is -19.95460110690626
-max lng is -16.31184225808087
-min lat is -0.002486793441415184
-max lat is 0.002464747685257366
-
-It looks like Phobos and Deimos had about an equal effect. So did upping the gravity model's fidelity from 10x10 to 50x50. All in all though, those first 10 gravity terms dominate the spacecraft dynamics. Mars is extremely lumpy, it's amazing that the current Mars orbiters can get any sort of precise imagery or data at all.
+The Sun's gravity had the most pronounced effect in the North-South direction. It looks like Phobos and Deimos had a smaller effect, but interestingly the two moons were about equal even though they are of very different sizes. Upping the gravity model's fidelity from 10x10 to 50x50, but all in all it looks like those first 10 gravity terms dominate the spacecraft dynamics. Mars is extremely lumpy, it's amazing that the current Mars orbiters can get any sort of precise imagery or data at all.
 
 ## Satellite Coverage
 
